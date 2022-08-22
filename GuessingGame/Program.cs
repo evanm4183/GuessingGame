@@ -21,6 +21,17 @@ namespace GuessingGame
                 int userGuess = GetUserGuess();
                 IsSecretNumber(userGuess, secretNumber);
 
+                if (secretNumber < userGuess)
+                {
+                    Console.WriteLine("Your guess is too high");
+                    Console.WriteLine("--------------------------");
+                }
+                else if (secretNumber > userGuess)
+                {
+                    Console.WriteLine("Your guess is too low");
+                    Console.WriteLine("--------------------------");
+                }
+
                 if (userGuess == secretNumber)
                 {
                     break;
