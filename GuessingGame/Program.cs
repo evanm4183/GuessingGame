@@ -6,9 +6,10 @@ namespace GuessingGame
     {
         static void Main(string[] args)
         {
-            int secretNumber = 42;
-            Console.WriteLine("Guess the secret number!");
+            Random random = new Random();
+            int secretNumber = random.Next(1, 100);
 
+            Console.WriteLine("Guess the secret number!");
             MultipleChances(4, secretNumber);
         }
 
@@ -16,7 +17,7 @@ namespace GuessingGame
         {
             for(int i = 0; i < numberOfChances; i++)
             {
-                Console.WriteLine($"Guess Number {i + 1}");
+                Console.WriteLine($"Guesses Left: {numberOfChances - i}");
                 int userGuess = GetUserGuess();
                 IsSecretNumber(userGuess, secretNumber);
 
@@ -26,7 +27,7 @@ namespace GuessingGame
                 }
                 if (i == numberOfChances - 1)
                 {
-                    Console.Write($"You used up all {numberOfChances} of your guesses");
+                    Console.Write($"You used up all {numberOfChances} of your guesses. The secret number was {secretNumber}");
                 }
             }
         }
@@ -45,7 +46,7 @@ namespace GuessingGame
 
         static int GetUserGuess()
         {
-            Console.Write("Enter a number: ");
+            Console.Write("Enter a number (1-100): ");
             int userGuess = int.Parse(Console.ReadLine());
 
             return userGuess;
