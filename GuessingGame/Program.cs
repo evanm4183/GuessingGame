@@ -16,6 +16,7 @@ namespace GuessingGame
         {
             for(int i = 0; i < numberOfChances; i++)
             {
+                Console.WriteLine($"Guess Number {i + 1}");
                 int userGuess = GetUserGuess();
                 IsSecretNumber(userGuess, secretNumber);
 
@@ -23,9 +24,11 @@ namespace GuessingGame
                 {
                     break;
                 }
+                if (i == numberOfChances - 1)
+                {
+                    Console.Write($"You used up all {numberOfChances} of your guesses");
+                }
             }
-
-            Console.Write($"You used up all {numberOfChances} of your guesses");
         }
 
         static void IsSecretNumber(int userGuess, int secretNumber)
