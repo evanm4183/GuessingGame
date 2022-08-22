@@ -8,7 +8,16 @@ namespace GuessingGame
         {
             Console.WriteLine("Guess the secret number!");
             int userGuess = GetUserGuess();
-            DisplayUserGuess(userGuess);
+            
+            int secretNumber = 42;
+
+            if (userGuess == secretNumber)
+            {
+                Console.WriteLine("You guessed the secret number!");
+            }
+            else {
+                Console.WriteLine("You guessed incorrectly");
+            }
         }
 
         static int GetUserGuess()
