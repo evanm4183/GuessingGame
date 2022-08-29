@@ -16,37 +16,40 @@ namespace GuessingGame
 
         static void MultipleChances(int numberOfChances, int secretNumber)
         {
-            for(int i = 0; i < numberOfChances; i++)
+            if (numberOfChances == -1)
             {
-                Console.WriteLine($"Guesses Left: {numberOfChances - i}");
-                int userGuess = GetUserGuess();
-                IsSecretNumber(userGuess, secretNumber);
-
-                if (secretNumber < userGuess)
+                int userGuess;
+                do
                 {
-                    Console.WriteLine("Your guess is too high");
-                    Console.WriteLine("--------------------------");
-                }
-                else if (secretNumber > userGuess)
+                    userGuess = GetUserGuess();
+                    IsSecretNumber(userGuess, secretNumber);
+                    HigherOrLower(userGuess, secretNumber);
+                } while (userGuess != secretNumber);
+            }
+            else
+            {
+               for(int i = 0; i < numberOfChances; i++)
                 {
-                    Console.WriteLine("Your guess is too low");
-                    Console.WriteLine("--------------------------");
-                }
-
-                if (userGuess == secretNumber)
-                {
-                    break;
-                }
-                if (i == numberOfChances - 1)
-                {
-                    Console.Write($"You used up all {numberOfChances} of your guesses. The secret number was {secretNumber}");
-                }
+                    Console.WriteLine($"Guesses Left: {numberOfChances - i}");
+                    int userGuess = GetUserGuess();
+                    IsSecretNumber(userGuess, secretNumber);
+                    HigherOrLower(userGuess, secretNumber);
+                    
+                    if (userGuess == secretNumber)
+                    {
+                        break;
+                    }
+                    if (i == numberOfChances - 1)
+                    {
+                        Console.Write($"You used up all {numberOfChances} of your guesses. The secret number was {secretNumber}");
+                    }
+                } 
             }
         }
 
         static int GetNumberOfChances()
         {
-            Console.WriteLine("Choose your difficulty (Easy-1, Medium-2, Hard-3): ");
+            Console.WriteLine("Choose your difficulty (Easy-1, Medium-2, Hard-3, Cheater-4): ");
             int difficulty = int.Parse(Console.ReadLine());
 
             if (difficulty == 1)
@@ -60,6 +63,10 @@ namespace GuessingGame
             else if (difficulty == 3)
             {
                 return 4;
+            }
+            else if (difficulty == 4)
+            {
+                return -1;
             }
             else {
                 Console.WriteLine("Not a valid input");
@@ -90,6 +97,20 @@ namespace GuessingGame
         static void DisplayUserGuess(int userGuess) 
         {
             Console.WriteLine($"You guessed {userGuess}");
+        }
+
+        static void HigherOrLower(int userGuess, int secretNumber)
+        {
+            if (secretNumber < userGuess)
+                {
+                    Console.WriteLine("Your guess is too high");
+                    Console.WriteLine("--------------------------");
+                }
+            else if (secretNumber > userGuess)
+                {
+                    Console.WriteLine("Your guess is too low");
+                    Console.WriteLine("--------------------------");
+                }
         }
     }
 }
